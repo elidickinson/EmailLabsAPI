@@ -11,6 +11,8 @@ Example:
 require_once("EmailLabsAPI.php");
 $api = new EmailLabsAPI();
 
+$api->config['siteid'] = 1234; // Your site ID goes here!
+
 $email = 'eli@example.com';
 
 // This is the Mailing List ID for the list you've created in EmailLabs
