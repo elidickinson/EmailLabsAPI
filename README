@@ -1,0 +1,37 @@
+EmailLabsAPI.php is a class that contains wrappers for several API functions for the Email Service Provider Lyris (nee EmailLabs).
+
+http://github.com/elidickinson/EmailLabsAPI
+
+Requires your PHP to be compiled with binding for cURL because we use that to POST data. Also requires DOMDocument classes in PHP, which should be compiled in by default (unless you did --disable-dom) 
+
+Example:
+
+<?php
+
+require_once("EmailLabsAPI.php");
+$api = new EmailLabsAPI();
+
+$email = 'eli@example.com';
+
+// This is the Mailing List ID for the list you've created in EmailLabs
+$mlid = 123456;
+
+// Demographics is an array where the keys are the ID of the field and the value is, well, the value. These
+// demographics must already be added the the given mailing list. 
+$demographics = array('1'=> 'Eli', '2'=>'Dickinson', '47'=>'Software Developer');
+// Demographics ID 1 is First Name, 2 is Last Name... see demographcis page in EmailLabs for more
+
+// Control whether or not to send a welcome message to this person (assuming one is configured) in EmailLabs
+$send_welcome = TRUE;
+
+$api_result = $api->subscribe($email, $mlid, $demographics, $send_welcome);
+
+if($result) {
+   print "Congrats, You're subscribed!";
+}
+else {
+   print "Error, unable to subscribe!";
+}
+
+
+?>
